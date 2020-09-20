@@ -12,20 +12,76 @@ namespace PacMan
 {
     public partial class Form1 : Form
     {
+
+        private int step = 2; 
+        private int horVelocity = 0;
+        private int verVelocity = 0;
+
         public Form1()
         {
             InitializeComponent();
+            timer1.Start();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            MessageBox.Show("Here we go!");
-            Hero.Visible = true;
-            Enemy.Visible = true;
-            Food.Visible = true;
-            buttonStart.Visible = false;
-            Hero.Top = 200;
-            Hero.Left = 150;
+            if(e.KeyCode == Keys.A)
+            {
+                horVelocity = -step;
+                verVelocity = 0;
+            }
+            else if(e.KeyCode == Keys.D)
+            {
+                horVelocity = step;
+                verVelocity = 0;
+            }
+            else if(e.KeyCode == Keys.W)
+            {
+                horVelocity = 0;
+                verVelocity = -step;
+            }
+            else if(e.KeyCode == Keys.S)
+            {
+                horVelocity = 0;
+                verVelocity = step;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Hero.Left += horVelocity;
+            Hero.Top += verVelocity;
+            HeroBorderCollision();
+            HeroEnemyCollision();
+        }
+
+        private void HeroBorderCollision()
+        {
+            if(Hero.Left + Hero.Width < 0)
+            {
+                Hero.Left = ClientRectangle.Width;
+            }
+            if(Hero.Left > ClientRectangle.Width)
+            {
+                Hero.Left = 0 - Hero.Width;
+            }
+            if(Hero.Top + Hero.Height < 0)
+            {
+                Hero.Top = ClientRectangle.Height;
+            }
+            if(Hero.Top > ClientRectangle.Height)
+            {
+                Hero.Top = 0 - Hero.Height;
+            }
+        }
+
+        private void HeroEnemyCollision()
+        {
+            if (Hero.Bounds.IntersectsWith(Enemy.Bounds))
+            {
+                timer1.Stop();
+                MessageBox.Show("Game Over!");
+            }
         }
     }
 }

@@ -28,28 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonStart = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
             this.Hero = new System.Windows.Forms.PictureBox();
             this.Enemy = new System.Windows.Forms.PictureBox();
             this.Food = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Hero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Food)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonStart
-            // 
-            this.buttonStart.BackColor = System.Drawing.SystemColors.ControlText;
-            this.buttonStart.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStart.ForeColor = System.Drawing.Color.Coral;
-            this.buttonStart.Location = new System.Drawing.Point(218, 142);
-            this.buttonStart.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(256, 98);
-            this.buttonStart.TabIndex = 0;
-            this.buttonStart.Text = "START GAME";
-            this.buttonStart.UseVisualStyleBackColor = false;
-            this.buttonStart.Click += new System.EventHandler(this.button1_Click);
             // 
             // Hero
             // 
@@ -59,7 +46,6 @@
             this.Hero.Size = new System.Drawing.Size(65, 60);
             this.Hero.TabIndex = 1;
             this.Hero.TabStop = false;
-            this.Hero.Visible = false;
             // 
             // Enemy
             // 
@@ -69,7 +55,6 @@
             this.Enemy.Size = new System.Drawing.Size(65, 60);
             this.Enemy.TabIndex = 2;
             this.Enemy.TabStop = false;
-            this.Enemy.Visible = false;
             // 
             // Food
             // 
@@ -79,7 +64,11 @@
             this.Food.Size = new System.Drawing.Size(65, 60);
             this.Food.TabIndex = 3;
             this.Food.TabStop = false;
-            this.Food.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -89,11 +78,11 @@
             this.Controls.Add(this.Food);
             this.Controls.Add(this.Enemy);
             this.Controls.Add(this.Hero);
-            this.Controls.Add(this.buttonStart);
             this.Font = new System.Drawing.Font("Burbank Big Cd Bk", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.Hero)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Food)).EndInit();
@@ -102,11 +91,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.PictureBox Hero;
         private System.Windows.Forms.PictureBox Enemy;
         private System.Windows.Forms.PictureBox Food;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
