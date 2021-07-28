@@ -18,6 +18,7 @@ namespace PacMan
         private int verVelocity = 0;
         private string heroDirection = "right";
         private int heroImageCount = 1;
+        private int foodImageCount = 1;
 
         Random rand = new Random();
 
@@ -33,7 +34,6 @@ namespace PacMan
 
             Food.BackColor = Color.Transparent;
             Food.SizeMode = PictureBoxSizeMode.StretchImage;
-            Food.Image = (Image)Properties.Resources.ResourceManager.GetObject("food_3");
 
             Enemy.BackColor = Color.Transparent;
             Enemy.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -78,10 +78,18 @@ namespace PacMan
 
         private void HeroFoodCollision()
         {
+            string foodName;
             if(Hero.Bounds.IntersectsWith(Food.Bounds))
             {
                 Food.Left = rand.Next(0, 401);
                 Food.Top = rand.Next(0, 401);
+                foodName = "food_" + foodImageCount;
+                Food.Image = (Image)Properties.Resources.ResourceManager.GetObject(foodName);
+                foodImageCount++;
+                if(foodImageCount > 4)
+                {
+                    foodImageCount = 1;
+                }
             }
         }
 
